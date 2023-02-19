@@ -5,9 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Clases.Generador generadorCodigo = new Clases.Generador();%>
+<!-- Script para tener como variables el id de el usuario y el tipo -->
+<% try {
+        session = request.getSession();
+        if (session.getAttribute("rol") == null) {
+            session.setAttribute("rol", 0);
+        }
+    } catch (Exception e) {
+    }
+    int idUsuario = 0;
+    int tipoUsuario = (int) session.getAttribute("rol");
+    if (tipoUsuario != 0) {
+        idUsuario = (int) session.getAttribute("id");
+    }
+%>
 <!DOCTYPE html>
 <html>
-    <% Clases.Generador generadorCodigo = new Clases.Generador();%>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +32,52 @@
     </head>
 
     <body>
-        <%= generadorCodigo.generarNavBar(3)%>
+        <%
+            String navBar = "";
+            if (tipoUsuario > 0) {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario, (int) session.getAttribute("id"));
+            } else {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario);
+            }
+        %>
+        <%= navBar%>
+    </body>
+    <div class="pt-5 pb-1">
+        <div class="container">
+            <div class="row">
+                <div class="px-5 col-md-8 text-center mx-auto" style="">º
+                    <h3 class="text-primary display-4"> <b>Libreria Alpes</b></h3>
+                    <h2 class="my-3">Gestion de saldo</h2>
+                    <h5 class="text-center">Elije el id y el nuevo saldo de el usuario, abajo de la pagina hay una lista de usuarios que puede servir de apoyo.</h5>
+                </div>
+            </div>
+        </div>
+    </div><div class="py-5">
+        <div class="container">
+            <h2 > Actualizar Saldo</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="scriptActualizarSaldoUsuario.jsp">
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label">ID</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" placeholder="4" name="idUpdateSaldo"> </div>
+                        </div>
+                        <div class="form-group row"> <label class="col-2 col-form-label">Saldo</label>
+                            <div class="col-10">
+                                <input type="number" step="0.01" class="form-control" placeholder="45,08"  name="saldoUpdateSaldo"> </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar valores de el Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%
+        String usuarios = "";
+        usuarios = generadorCodigo.generarListaUsuarios(Clases.Query.getUsuariosLista());
+    %>
+    <%= usuarios%>
     </body>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>

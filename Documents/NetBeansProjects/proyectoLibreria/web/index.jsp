@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% try {
+        session = request.getSession();
+        if (session.getAttribute("rol") == null) {
+            session.setAttribute("rol", 0);
+        }
+    } catch (Exception e) {
+    }
+
+    int tipoUsuario = (int) session.getAttribute("rol");
+%>
 <!DOCTYPE html>
 <html>
     <% Clases.Generador generadorCodigo = new Clases.Generador();%>
@@ -19,7 +29,15 @@
         <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
     </head>
     <body>
-        <%= generadorCodigo.generarNavBar(0)%>
+        <%
+            String navBar = "";
+            if (tipoUsuario > 0 ) {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario, (int) session.getAttribute("id"));
+            } else {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario);
+            }
+        %>
+        <%= navBar%>
 
         <!-- Imagen de encabezado -->
         <div class="py-5 text-center text-white h-100 align-items-center d-flex" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url(https://static.pingendo.com/cover-bubble-dark.svg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
@@ -27,7 +45,14 @@
                 <div class="row">
                     <div class="mx-auto col-lg-8 col-md-10">
                         <h1 class="display-3 mb-4">Libreria Alpes</h1>
-                        <p class="lead mb-5">Vendiendo libros desde 1850 para educar a las nuevas generaciones</p> <a href="login.jsp" class="btn btn-lg btn-primary mx-1">Log in</a> <a class="btn btn-lg mx-1 btn-outline-primary" href="tienda.jsp">Tienda</a>
+                        <p class="lead mb-5">Vendiendo libros desde 1850 para educar a las nuevas generaciones</p> 
+                        <%  String botonLogin = "";
+                            if (tipoUsuario == 0) {
+                                botonLogin = "<a href=\"login.jsp\" class=\"btn btn-lg btn-primary mx-1\">Log in</a>";
+                            }
+                        %>
+                        <%= botonLogin%>
+                        <a class="btn btn-lg mx-1 btn-outline-primary" href="tienda.jsp">Tienda</a>
                     </div>
                 </div>
             </div>

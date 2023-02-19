@@ -57,7 +57,7 @@
         <!-- Seccion para filtrar y buscar productos -->
         <div class="py-0 pt-2">
             <div class="container">
-                <form action="tiendaFiltro.jsp" METHOD="POST">
+                <form action="tiendaFiltro.jsp">
                     <div class="row">
                         <!-- Columna 1 -->
                         <!-- Barra de busqueda -->
@@ -72,7 +72,7 @@
                             <select class="form-select" aria-label="Categoria" id="categoria-buscar" name="categoriaFiltro">
                                 <option selected="" value="Todas">Elegir Categoria</option>
                                 <% String categorias = Clases.Query.getCategorias();%>
-                                <%= categorias %>
+                                <%= categorias%>
                             </select>
                         </div>
                         <!-- Columna 3 -->
@@ -80,8 +80,8 @@
                         <div class="col-md-4">
                             <label for="precio-buscar" class="form-label">Precio Maximo</label>
                             <div class="input-group mb-3">
-                                <input type="number" step="0.01" class="form-control" name="maximoFiltro">
-                                <span class="input-group-text">€</span>
+                                <span class="input-group-text">$</span>
+                                <input type="number" step="0.01" class="form-control" aria-label="Amount (to the nearest dollar)" name="maximoFiltro">
                             </div>
                         </div>
                     </div>
@@ -99,8 +99,28 @@
         <div class="container d-flex justify-content-center mt-5x mb-50">
             <div class="row">
                 <!-- Productos -->
-                <% String productos = generadorCodigo.cargarProductosTienda();%>
-                <%= productos%>
+                <%
+                    String filtroNombre = "";
+                    String categoria = "";
+                    double maximo = 9999;
+
+                    if (request.getParameter("nombreFiltro") != null) {
+
+                        filtroNombre = (String) request.getParameter("nombreFiltro");
+                    }
+
+                    if (request.getParameter("categoriaFiltro") != null) {
+
+                        categoria = (String) request.getParameter("categoriaFiltro");
+                    }
+
+                    if (!request.getParameter("maximoFiltro").equals("")) {
+                        maximo = Double.valueOf(request.getParameter("maximoFiltro"));
+                    }
+                %>
+                <% String tienda = Clases.Query.dibujarProductosTiendaFiltrada(filtroNombre, categoria, maximo);%>
+                <%= tienda%>
+
             </div>
         </div>
         <!-- Fin de la seecion de el producto -->
