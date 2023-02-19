@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Query {
-    
+
     public Query() {
     }
 
@@ -33,15 +33,15 @@ public class Query {
                 rs.close();
                 stmt.close();
                 con.close();
-                
+
                 return new String[]{imagen, titulo, categoria, precio, valoracion, idString};
             }
             con.close();
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return null;
     }
 
@@ -49,19 +49,19 @@ public class Query {
      * Obtiene la cantidad de productos que hay en la table de productos
      */
     public static int getCantidadProducos() {
-        
+
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM `productos`;");
             while (rs.next()) {
-                
+
                 respuesta = rs.getInt(1);
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -73,16 +73,16 @@ public class Query {
      *
      */
     public static int getTipoUsuario(String correo) {
-        
+
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT tipo FROM `usuarios` where correo='" + correo + "'");
             while (rs.next()) {
-                
+
                 respuesta = rs.getInt(1);
             }
         } catch (Exception e) {
@@ -97,10 +97,10 @@ public class Query {
      * @return
      */
     public static String getCategorias() {
-        
+
         String respuesta = "";
         String plantilla = "<option>&Categoria&</option>\n";
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -112,7 +112,7 @@ public class Query {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -120,16 +120,16 @@ public class Query {
      * Obtiene el id de el usuario
      */
     public static int getIdUsuario(String correo) {
-        
+
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id FROM `usuarios` where correo='" + correo + "'");
             while (rs.next()) {
-                
+
                 respuesta = rs.getInt(1);
             }
         } catch (Exception e) {
@@ -142,16 +142,16 @@ public class Query {
      * Obtiene el saldo de un usuario
      */
     public static double getSaldoUsuario(int id) {
-        
+
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT saldo FROM `usuarios` where id='" + id + "'");
             while (rs.next()) {
-                
+
                 respuesta = rs.getInt(1);
             }
         } catch (Exception e) {
@@ -169,7 +169,7 @@ public class Query {
      */
     public static int getCantidadProductosCarrito(int idUsuario) {
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -181,7 +181,7 @@ public class Query {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -192,9 +192,9 @@ public class Query {
      * @return
      */
     public static double getPrecioTotalProductosCarrtio(int idUsuario) {
-        
+
         double respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -206,7 +206,7 @@ public class Query {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -217,9 +217,9 @@ public class Query {
      * @return
      */
     public static int getNumeroHistorialPedido(int idUsuario) {
-        
+
         int respuesta = 0;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -231,7 +231,7 @@ public class Query {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -243,7 +243,7 @@ public class Query {
     public static String getUsuariosLista() {
         String respuesta = "";
         Generador a = new Generador();
-        
+
         String tablaModelo
                 = "                <tr>\n"
                 + "                  <td>&idUsuario&</td>\n"
@@ -251,9 +251,9 @@ public class Query {
                 + "                  <td>&saldoUsuario&€</td>\n"
                 + "                  <td>&tipoUsuario&</td>\n"
                 + "                </tr>\n";
-        
+
         String filas = "";
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -262,12 +262,12 @@ public class Query {
             while (rs.next()) {
                 respuesta += tablaModelo.replace("&idUsuario&", Integer.toString(rs.getInt(1))).replace("&correoUsuario&", rs.getString(2)).replace("&saldoUsuario&", Double.toString(rs.getDouble(3))).replace("&tipoUsuario&", Integer.toString(rs.getInt(4)));
             }
-            
+
         } catch (Exception e) {
             respuesta = e.getMessage();
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -279,9 +279,9 @@ public class Query {
      * @return
      */
     public static String getFilasProductoHistorial(int idUsuario, int idPedido) {
-        
+
         String respuesta = "";
-        
+
         String tablaModelo
                 = "                <tr>\n"
                 + "                  <td>&nombreProducto&</td>\n"
@@ -290,7 +290,7 @@ public class Query {
                 + "                  <td>&cantidadProducto&</td>\n"
                 + "                  <td>&precioTotal&€</td>\n"
                 + "                </tr>\n";
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -302,7 +302,7 @@ public class Query {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return respuesta;
     }
 
@@ -314,24 +314,24 @@ public class Query {
      * @return
      */
     public static boolean haySaldoSuficiente(int idUsuario) {
-        
+
         double saldoCliente = 0;
         double totalProducto = 0;
         double envio = 0;
         double totalPedido = 0;
         double saldoFinal = 0;
         Generador generarCodigo = new Generador();
-        
+
         saldoCliente = getSaldoUsuario(idUsuario);
         totalProducto = getPrecioTotalProductosCarrtio(idUsuario);
         envio = getCantidadProductosCarrito(idUsuario) * 5.00;
         totalPedido = totalProducto + envio;
         saldoFinal = Math.round((saldoCliente - totalPedido) * 100.0) / 100.0;;
-        
+
         if (saldoFinal > 0) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -351,7 +351,7 @@ public class Query {
                     rs.close();
                     stmt.close();
                     con.close();
-                    
+
                     return true;
                 }
             }
@@ -377,7 +377,7 @@ public class Query {
                     rs.close();
                     stmt.close();
                     con.close();
-                    
+
                     return true;
                 }
             }
@@ -391,7 +391,7 @@ public class Query {
      * Comprueba que la contraseña ela que corresponde con el usuario
      */
     public static boolean contraseñaCorrecta(String correo, String pass) {
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -404,7 +404,7 @@ public class Query {
                     rs.close();
                     stmt.close();
                     con.close();
-                    
+
                     return true;
                 }
             }
@@ -436,6 +436,37 @@ public class Query {
                     rs.close();
                     stmt.close();
                     con.close();
+
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Devuelve true si el usuario tiene algun pedido
+     *
+     * @param idUsuario
+     * @return
+     */
+    public static boolean elUsuarioTienePedidos(int idUsuario) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM `historial_pedidos` WHERE idUsuario = " + idUsuario + ";");
+            int contador = 0;
+            while (rs.next()) {
+                contador++;
+                if (contador > 0) {
+
+                    //Metodos que cierran toodo antes de un return
+                    rs.close();
+                    stmt.close();
+                    con.close();
                     
                     return true;
                 }
@@ -454,18 +485,18 @@ public class Query {
      */
     public static void aumentarCantidadProducto(int idUsuario, int idProducto) {
         if (idUsuario > 0) {
-            
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
                 Statement stmt = con.createStatement();
                 stmt.executeUpdate("UPDATE `carrito` SET cantidad = cantidad + 1 WHERE idCliente = " + idUsuario + " and idProducto = " + idProducto + ";");
-                
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        
+
     }
 
     /**
@@ -482,7 +513,7 @@ public class Query {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("INSERT INTO `usuarios`(`correo`, `pass`, `saldo`, `tipo`) VALUES ('" + correo + "','" + pass + "','" + Double.toString(saldo) + "','" + Integer.toString(tipo) + "')");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -503,7 +534,7 @@ public class Query {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("UPDATE `usuarios` SET `correo`='" + correo + "',`pass`='" + pass + "',`saldo`='" + Double.toString(saldo) + "',`tipo`='" + Integer.toString(tipo) + "' WHERE id = " + id + ";");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -520,7 +551,7 @@ public class Query {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("DELETE FROM `usuarios` WHERE id = " + id + ";");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -532,13 +563,13 @@ public class Query {
      */
     public static void añadirProductoCarrito(int idUsuario, int idProducto) {
         if (idUsuario > 0) {
-            
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
                 Statement stmt = con.createStatement();
                 stmt.executeUpdate("INSERT INTO `carrito`(`idCliente`, `idProducto`, `cantidad`) VALUES ('" + idUsuario + "','" + idProducto + "','1')");
-                
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -562,7 +593,7 @@ public class Query {
             stmt.executeUpdate("INSERT INTO `productos`(`titulo`, `categoria`, "
                     + "`precio`, `valoracion`, `imagen`) VALUES ('" + titulo + "',"
                     + "'" + categoria + "','" + Double.toString(precio) + "','" + Integer.toString(valoracion) + "','" + imagen + "')");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -579,19 +610,37 @@ public class Query {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("DELETE FROM `productos` WHERE titulo = '" + titulo + "'");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
+    /**
+     * Actualiza el saldo de el usuario pasado por parametro
+     *
+     * @param idUsuario
+     * @param saldo
+     */
     public static void actualizarSaldo(int idUsuario, double saldo) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("UPDATE `usuarios` SET `saldo`='" + Double.toString(saldo) + "' WHERE id = '" + Integer.toString(idUsuario) + "';");
-            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void actualizarEstadoPedido(int idUsuario, int idPedido, String estado){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE `historial_pedidos` SET `estado`='"+estado+"' WHERE idPedido = "+idPedido+" and idUsuario = "+idUsuario+";");
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -605,7 +654,7 @@ public class Query {
     public static void añadirPedidoHistorial(int idUsuario) {
         int idPedido = getNumeroHistorialPedido(idUsuario) + 1;
         if (idUsuario > 0) {
-            
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
@@ -628,20 +677,20 @@ public class Query {
      * @param idUsuario
      */
     public static void actualizarSaldo(int idUsuario) {
-        
+
         double saldoCliente = 0;
         double totalProducto = 0;
         double envio = 0;
         double totalPedido = 0;
         double saldoFinal = 0;
         Generador generarCodigo = new Generador();
-        
+
         saldoCliente = getSaldoUsuario(idUsuario);
         totalProducto = getPrecioTotalProductosCarrtio(idUsuario);
         envio = getCantidadProductosCarrito(idUsuario) * 5.00;
         totalPedido = totalProducto + envio;
         saldoFinal = Math.round((saldoCliente - totalPedido) * 100.0) / 100.0;;
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
@@ -659,13 +708,13 @@ public class Query {
      */
     public static void borrarCarrito(int idUsuario) {
         if (idUsuario > 0) {
-            
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "escritura", "CG/bnNk(S/SLo8Cq");
                 Statement stmt = con.createStatement();
                 stmt.executeUpdate("DELETE FROM `carrito` WHERE idCliente = " + idUsuario + ";");
-                
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -690,19 +739,19 @@ public class Query {
                 String[] partes = {rs.getString(1), rs.getString(2), rs.getString(3), Double.toString(rs.getDouble(4)), Integer.toString(rs.getInt(5)), null, Integer.toString(rs.getInt(6))};
                 respuesta += a.generarProductoCarrito(partes);
             }
-            
+
         } catch (Exception e) {
             respuesta = e.getMessage();
             System.out.println(e.getMessage());
         }
-        
+
         if (respuesta.equals("")) {
             respuesta
                     = "              <div class=\"pt-5\" >\n"
                     + "                <h3 class=\"text-center\">Parece que no has añadido nada a el carrito, deberias ir a la tienda y añadir algunos libros.</h3>\n"
                     + "              </div>";
         }
-        
+
         return respuesta;
     }
 
@@ -721,16 +770,54 @@ public class Query {
         double totalPedido = 0;
         double saldoFinal = 0;
         Generador generarCodigo = new Generador();
-        
+
         saldoCliente = getSaldoUsuario(idUsuario);
         totalProducto = getPrecioTotalProductosCarrtio(idUsuario);
         envio = getCantidadProductosCarrito(idUsuario) * 5.00;
         totalPedido = totalProducto + envio;
         saldoFinal = Math.round((saldoCliente - totalPedido) * 100.0) / 100.0;;
-        
+
         double[] datos = {saldoCliente, totalProducto, envio, totalPedido, saldoFinal};
         respuesta = generarCodigo.generarResumenPedido(datos);
-        
+
+        return respuesta;
+    }
+
+    /**
+     * Dibuja el historial de todos los usuarios
+     *
+     * @return
+     */
+    public static String dibujarTodoLosHistorialesPedido() {
+
+        String respuesta = "";
+
+        String plantilla
+                = "  <div class=\"p-0\" >\n"
+                + "    <div class=\"container\">\n"
+                + "      <div class=\"row\">\n"
+                + "        <div class=\"col-md-12\">\n"
+                + "          <h1 class=\"display-4 p-0 m-0\">Pedidos de el Usuario: &&&</h1>\n"
+                + "        </div>\n"
+                + "      </div>\n"
+                + "    </div>\n"
+                + "  </div>";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id from usuarios ORDER by id ASC;");
+            while (rs.next()) {
+                if (elUsuarioTienePedidos(rs.getInt(1))) {
+                    respuesta += plantilla.replace("&&&", Integer.toString(rs.getInt(1)));
+                    respuesta += dibujarHistorialPedidosTotal(rs.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         return respuesta;
     }
 
@@ -742,16 +829,16 @@ public class Query {
      * @return
      */
     public static String dibujarHistorialPedidosTotal(int idUsuario) {
-        
+
         String respuesta = "";
         int contador = 0;
-        
+
         int numeroPedido = 0;
         String estadoPedido = "";
         String infoProducto = "";
-        
+
         Generador generaCodigo = new Generador();
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -763,12 +850,12 @@ public class Query {
                 estadoPedido = rs.getString(2);
                 infoProducto = getFilasProductoHistorial(idUsuario, numeroPedido);
                 respuesta += generaCodigo.generarHistorialPedido(Integer.toString(numeroPedido), estadoPedido, infoProducto);
-                
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         if (contador == 0) {
             respuesta = "          <p class=\"lead text-center\" >Parece que no has comprado nada, deberias ir a la tienda y comprar unos libros, nunca vienen mal.</p>";
         }
@@ -780,24 +867,24 @@ public class Query {
      */
     public static String dibujarProductosTiendaFiltrada(String nombre, String categoria, double maximo) {
         String respuesta = "";
-        
+
         String filtroNombre = "";
         String filtroCategoria = "";
         String filtroMaximo = " precio < " + maximo + ";";
-        
+
         if (!nombre.equals("")) {
             filtroNombre = " titulo like '%" + nombre + "%' and";
         }
-        
+
         if (!categoria.equals("Todas")) {
             filtroCategoria = " categoria = '" + categoria + "' and";
         }
-        
+
         String query = "select id from productos where" + filtroNombre + filtroCategoria + filtroMaximo;
         writeToFile(query, "C:\\Users\\micha\\Desktop\\b.txt");
-        
+
         Generador generaCodigo = new Generador();
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectolibreria", "lectura", "]dsS0omVISMl!CGx");
@@ -812,7 +899,7 @@ public class Query {
         }
         return respuesta;
     }
-    
+
     public static void writeToFile(String text, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -824,5 +911,5 @@ public class Query {
             e.printStackTrace();
         }
     }
-    
+
 }

@@ -57,7 +57,7 @@
                 <h2 > Dar de alta Producto</h2>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="scriptDarDeAltaProducto.jsp">
+                        <form action="Scripts/scriptDarDeAltaProducto.jsp">
                             <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label">Titulo</label>
                                 <div class="col-10">
                                     <input type="text" class="form-control" id="inputmailh" placeholder="Un titulo interesante" name="tituloAlta"> </div>
@@ -90,7 +90,7 @@
             <h2 > Dar de baja Producto</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <form action="scriptDarDeBajaProducto.jsp">
+                    <form action="Scripts/scriptDarDeBajaProducto.jsp">
                         <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label">Titulo</label>
                             <div class="col-10">
                                 <input type="text" class="form-control" id="inputmailh" placeholder="Un titulo interesante" name="tituloAlta"> </div>
