@@ -5,9 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Clases.Generador generadorCodigo = new Clases.Generador();%>
+<!-- Script para tener como variables el id de el usuario y el tipo -->
+<% try {
+        session = request.getSession();
+        if (session.getAttribute("rol") == null) {
+            session.setAttribute("rol", 0);
+        }
+    } catch (Exception e) {
+    }
+    int idUsuario = 0;
+    int tipoUsuario = (int) session.getAttribute("rol");
+    if (tipoUsuario != 0) {
+        idUsuario = (int) session.getAttribute("id");
+    }
+%>
 <!DOCTYPE html>
 <html>
-    <% Clases.Generador generadorCodigo = new Clases.Generador();%>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +32,15 @@
     </head>
 
     <body>
-        <%= generadorCodigo.generarNavBar(3)%>
+        <%
+            String navBar = "";
+            if (tipoUsuario > 0 ) {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario, (int) session.getAttribute("id"));
+            } else {
+                navBar = generadorCodigo.generarNavBar(tipoUsuario);
+            }
+        %>
+        <%= navBar%>
     </body>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>

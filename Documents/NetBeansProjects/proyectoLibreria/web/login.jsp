@@ -1,13 +1,44 @@
-<%-- 
+    <%-- 
     Document   : login
     Created on : 16 feb 2023, 11:24:26
     Author     : Michael
 --%>
 
+<%@page import="Clases.Query"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Clases.Generador generadorCodigo = new Clases.Generador();
+    Clases.Query queryMaster = new Clases.Query();
+    String correo = request.getParameter("correo");
+    String pass = request.getParameter("pass");
+    String error = "";
+    if (request.getParameter("pass") == null && request.getParameter("correo") == null) {
+        // nada 
+    } else {
+        if ((request.getParameter("pass") != null && request.getParameter("correo") == null) || (request.getParameter("pass") == null && request.getParameter("correo") != null)) {
+            error += "Hay que rellenar los dos campos.\n";
+        }
+        if (pass.contains(" ") || correo.contains(" ")) {
+            error += "El correo o la contraseña no pueden contener espacios en blanco.\n";
+        }
+        if (error.equals("")) {
+            if (queryMaster.existeUsuario(correo)) {
+                if (queryMaster.contraseñaCorrecta(correo, pass)) {
+                    int rol = queryMaster.getTipoUsuario(correo);
+                    int id = queryMaster.getIdUsuario(correo);
+                    session.setAttribute("rol", rol);
+                    session.setAttribute("id", id);
+                    response.sendRedirect("index.jsp");
+                }
+            } else {
+                error = "El usuario o la contraseña son incorrectos";
+            }
+        }
+    }
+
+%>
 <!DOCTYPE html>
 <html>
-    <% Clases.Generador generadorCodigo = new Clases.Generador();%>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,13 +54,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="">
-                            <div class="form-group"> <label>Correo</label> <input type="email" class="form-control" placeholder="Introduce tu correo"> </div>
-                            <div class="form-group"> <label>Contraseña</label> <input type="password" class="form-control" placeholder="Contraseña"> </div>
-                            <% boolean error = false; %>
-                            
+                        <form action="login.jsp">
+                            <div class="form-group"> <label>Correo</label> <input type="email" class="form-control" name="correo" placeholder="Introduce tu correo"> </div>
+                            <div class="form-group"> <label>Contraseña</label> <input type="password" class="form-control" name="pass" placeholder="Contraseña"> </div>
+                                <%= generadorCodigo.generarError(error)%>
                             <button type="submit" class="btn btn-primary">Log in</button>
-                            
+
                         </form>
                     </div>
                 </div>
