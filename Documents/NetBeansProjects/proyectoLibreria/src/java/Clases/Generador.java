@@ -87,15 +87,15 @@ public class Generador {
             parte2Nav += "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"cerrarSesion.jsp\">Cerrar Sesion</a> </li>\n";
 
             if (tipoUsuario == 3) {
-                parte1Nav += "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"usuarios.jsp\">Gestion Usuarios </a> </li> <!-- Dar de alta usuarios -->\n";
+                parte1Nav += "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"gestionUsuarios.jsp\">Gestion Usuarios </a> </li> <!-- Dar de alta usuarios -->\n";
 
             }
 
             if (tipoUsuario == 2 || tipoUsuario == 3) {
                 parte1Nav
-                        += "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"saldo.jsp\">Gestion Saldo</a> </li> <!-- Gestionar Saldo -->\n"
+                        += "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"gestionSaldo.jsp\">Gestion Saldo</a> </li> <!-- Gestionar Saldo -->\n"
                         + "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"gestionProductos.jsp\">Gestion Productos</a> </li> <!-- Gestionar Productos -->\n"
-                        + "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"compras.jsp\">Gestion Compras</a> </li> <!-- Gestionar Compras -->\n";
+                        + "          <li class=\"nav-item\"> <a class=\"nav-link\" href=\"gestionCompras.jsp\">Gestion Compras</a> </li> <!-- Gestionar Compras -->\n";
             }
         }
 
@@ -135,7 +135,7 @@ public class Generador {
                 + "              $valoracion$"
                 + "            </div>\n"
                 + "            <!-- Añadir a el carrito -->\n"
-                + "            <form action=\"scriptAñadirCarrito.jsp\">\n"
+                + "            <form action=\"  Scripts/scriptAñadirCarrito.jsp\">\n"
                 + "             <input type=\"hidden\" name=\"productoId\" value=\"" + datosProducto[5] + "\">\n"
                 + "            <button type=\"submit\" class=\"btn bg-cart\"><i class=\"fa fa-cart-plus mr-2\"></i> Añadir a el carrtio</button>\n"
                 + "            </form>\n"
@@ -310,10 +310,10 @@ public class Generador {
                 + "              <div class=\"summary-item\"><span class=\"text\">Envio</span><span class=\"price\">$envio$€</span></div>\n"
                 + "              <div class=\"summary-item\"><span class=\"text\">Total pedido</span><span class=\"price\">$totalpedido$€</span></div>\n"
                 + "              <div class=\"summary-item mt-2\"><span class=\"text\">Saldo de la cuenta final</span><span class=\"price\">$saldofinal$€</span></div>\n"
-                + "              <form action=\"scriptPagar.jsp\">\n"
+                + "              <form action=\"Scripts/scriptPagar.jsp\">\n"
                 + "                <button type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Pagar</button>\n"
                 + "              </form>\n"
-                + "              <form action=\"scriptBorrarCarrito.jsp\">\n"
+                + "              <form action=\"Scripts/scriptBorrarCarrito.jsp\">\n"
                 + "                <button type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Limpiar Carrito</button>\n"
                 + "              </form>\n"
                 + "            </div>";

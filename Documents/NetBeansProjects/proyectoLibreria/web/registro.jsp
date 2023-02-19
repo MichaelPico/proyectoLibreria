@@ -23,14 +23,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="">
+                        <form action="Scripts/scriptRegistro.jsp">
                             <div class="form-group"> <label>Correo</label>
-                                <input type="email" class="form-control" placeholder="mail@ejemplo.com"> </div>
+                                <input type="email" class="form-control" placeholder="mail@ejemplo.com" name="correo"> </div>
                             <div class="form-group"> <label>Contraseña</label>
-                                <input type="password" class="form-control" placeholder="contraseña" id="inputpasswordh"> </div>
+                                <input type="password" class="form-control" placeholder="contraseña" id="inputpasswordh" name="pass1"> </div>
                             <div class="form-group"> <label>Repetir Contraseña</label>
-                                <input type="password" class="form-control" id="inputpasswordh" placeholder="contraseña"> </div>
-                        </form><button type="submit" class="btn btn-primary">Registrar</button>
+                                <input type="password" class="form-control" id="inputpasswordh" placeholder="contraseña" name="pass2"> </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
                     </div>
                 </div>
             </div>
